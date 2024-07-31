@@ -17,7 +17,7 @@ function loadProxy() {
     .then(response => response.text())
     .then(data => {
         const iframe = document.getElementById('proxyFrame');
-        iframe.srcdoc = data; // Use srcdoc if you’re loading HTML content
+        iframe.srcdoc = data; // Note: Use srcdoc to embed HTML content
     })
     .catch(error => console.error('Error:', error));
 }
