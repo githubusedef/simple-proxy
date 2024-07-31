@@ -6,6 +6,18 @@ function loadProxy() {
         url = `https://${url}`;
     }
 
-    const iframe = document.getElementById('proxyFrame');
-    iframe.src = `https://cors-anywhere.herokuapp.com/${url}`;
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+
+    fetch(proxyUrl, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest' // Include required header
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        const iframe = document.getElementById('proxyFrame');
+        iframe.srcdoc = data; // Use srcdoc if you’re loading HTML content
+    })
+    .catch(error => console.error('Error:', error));
 }
