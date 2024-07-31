@@ -6,12 +6,12 @@ function loadProxy() {
         url = `https://${url}`;
     }
 
-    const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+    const proxyUrl = `http://localhost:3000/proxy?url=${encodeURIComponent(url)}`;
 
     fetch(proxyUrl, {
         method: 'GET',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest' // Include required header
+            'X-Requested-With': 'XMLHttpRequest' // Optional if your proxy server does not need this
         }
     })
     .then(response => response.text())
