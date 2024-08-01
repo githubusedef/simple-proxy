@@ -6,9 +6,9 @@ function loadProxy() {
         url = `https://${url}`;
     }
 
+    // Use the public proxy service
     const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
 
-    // Load the URL through the proxy
     fetch(proxyUrl)
         .then(response => response.text())
         .then(data => {
