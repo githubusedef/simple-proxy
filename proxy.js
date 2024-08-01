@@ -6,14 +6,20 @@ function loadProxy() {
         url = `https://${url}`;
     }
 
-    // Use the public proxy service
+    // Use the CORS Anywhere proxy
     const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
 
-    fetch(proxyUrl)
-        .then(response => response.text())
-        .then(data => {
-            const iframe = document.getElementById('proxyFrame');
-            iframe.srcdoc = data; // Embed the HTML content
-        })
-        .catch(error => console.error('Error:', error));
+    // Fetch content from the proxied URL
+    fetch(proxyUrl, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest' // This header is often required
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        const iframe = document.getElementById('proxyFrame');
+        iframe.srcdoc = data; // Embed the HTML content
+    })
+    .catch(error => console.error('Error:', error));
 }
